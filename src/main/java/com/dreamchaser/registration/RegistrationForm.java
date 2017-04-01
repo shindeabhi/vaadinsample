@@ -7,32 +7,33 @@ import com.vaadin.ui.*;
  */
 public class RegistrationForm {
 
-    public static void buildRegistrationForm(Layout layout) {
+    public static Layout buildRegistrationForm() {
+        FormLayout formLayout = new FormLayout();
         final TextField firstName = new TextField();
         firstName.setCaption("First Name:");
-        addComponent(layout, firstName);
+        addComponent(formLayout, firstName);
 
         final TextField lastName = new TextField();
         lastName.setCaption("Last Name:");
-        addComponent(layout, lastName);
+        addComponent(formLayout, lastName);
 
         final TextField email = new TextField();
         email.setCaption("Email:");
-        addComponent(layout, email);
+        addComponent(formLayout, email);
 
         final TextField contactNo = new TextField();
         contactNo.setCaption("Contact No:");
-        addComponent(layout, contactNo);
+        addComponent(formLayout, contactNo);
 
         final RichTextArea defineYou = new RichTextArea();
         defineYou.setCaption("Tell us something about yourself");
-        addComponent(layout, defineYou);
+        addComponent(formLayout, defineYou);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         Button submit = new Button("Submit");
         submit.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + firstName.getValue()
+            formLayout.addComponent(new Label("Thanks " + firstName.getValue()
                     + " for submitting for details!!!"));
         });
 
@@ -48,12 +49,10 @@ public class RegistrationForm {
         horizontalLayout.addComponent(submit);
         horizontalLayout.addComponent(clearData);
 
-        addComponent(layout,horizontalLayout);
+        addComponent(formLayout, horizontalLayout);
 
-        // addComponent(layout, submit);
-        // addComponent(layout,clearData);
-
-    }
+        return formLayout;
+     }
 
     private static void addComponent(Layout layout, Component component) {
         layout.addComponent(component);
