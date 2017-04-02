@@ -24,25 +24,32 @@ public class EntryPoint extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        Layout mainLayout = new HorizontalLayout();
-        mainLayout.setHeight("95%");
-        mainLayout.setWidth("95%");
+        VerticalLayout mainLayout = new VerticalLayout();
+        mainLayout.setSpacing(FALSE);
 
-        Layout horzLayoutForMenu = new HorizontalLayout();
+        HorizontalLayout menubar = new HorizontalLayout();
+        setUpMenu(menubar);
+        mainLayout.addComponent(menubar);
+        HorizontalLayout menuAction = new HorizontalLayout();
+        setUpMenuActions(menuAction);
+        mainLayout.addComponent(menuAction);
+        setContent(mainLayout);
+    }
+
+    private void setUpMenu(Layout layout) {
         MenuBar menuBar = new MenuBar();
-        menuBar.addItem("Student Registration", menuItem -> {
-            mainLayout.addComponent(buildRegistrationForm());
-        });
+        menuBar.addItem("Student Registration",null);
         menuBar.addItem("Student Inbox", null);
         menuBar.addItem("Sponsers Near-By", null);
         menuBar.addItem("Sponser Registration", null);
         menuBar.addItem("Sponsor Inbox", null);
         menuBar.addItem("Students Near-By", null);
         menuBar.setStyleName(ValoTheme.MENUBAR_BORDERLESS);
+        layout.addComponent(menuBar);
+    }
 
-        horzLayoutForMenu.addComponent(menuBar);
-        mainLayout.addComponent(horzLayoutForMenu);
-        setContent(mainLayout);
+    private void setUpMenuActions(Layout mainLayout) {
+        mainLayout.addComponent(buildRegistrationForm());
     }
 
 

@@ -8,31 +8,33 @@ import com.vaadin.ui.*;
 public class RegistrationForm {
 
     public static Layout buildRegistrationForm() {
-        FormLayout formLayout = new FormLayout();
+        FormLayout form = new FormLayout();
+        form.setSizeFull();
+
         final TextField firstName = new TextField();
         firstName.setCaption("First Name:");
-        addComponent(formLayout, firstName);
+        addComponent(form, firstName);
 
         final TextField lastName = new TextField();
         lastName.setCaption("Last Name:");
-        addComponent(formLayout, lastName);
+        addComponent(form, lastName);
 
         final TextField email = new TextField();
         email.setCaption("Email:");
-        addComponent(formLayout, email);
+        addComponent(form, email);
 
         final TextField contactNo = new TextField();
         contactNo.setCaption("Contact No:");
-        addComponent(formLayout, contactNo);
+        addComponent(form, contactNo);
 
         final RichTextArea defineYou = new RichTextArea();
         defineYou.setCaption("Tell us something about yourself");
-        // addComponent(formLayout, defineYou);
+        // addComponent(form, defineYou);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         Button submit = new Button("Submit");
-        submit.addClickListener(e -> formLayout.addComponent(new Label("Thanks " + firstName.getValue()
+        submit.addClickListener(e -> form.addComponent(new Label("Thanks " + firstName.getValue()
                 + " for submitting for details!!!")));
 
         Button clearData = new Button("Clear Data");
@@ -47,9 +49,9 @@ public class RegistrationForm {
         horizontalLayout.addComponent(submit);
         horizontalLayout.addComponent(clearData);
 
-        addComponent(formLayout, horizontalLayout);
+        addComponent(form, horizontalLayout);
 
-        return formLayout;
+        return form;
     }
 
     private static void addComponent(Layout layout, Component component) {
