@@ -22,6 +22,8 @@ import static java.lang.Boolean.*;
 @Theme("mytheme")
 public class EntryPoint extends UI {
 
+    HorizontalLayout menuAction = null;
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         VerticalLayout mainLayout = new VerticalLayout();
@@ -30,15 +32,18 @@ public class EntryPoint extends UI {
         HorizontalLayout menubar = new HorizontalLayout();
         setUpMenu(menubar);
         mainLayout.addComponent(menubar);
-        HorizontalLayout menuAction = new HorizontalLayout();
-        setUpMenuActions(menuAction);
+        menuAction = new HorizontalLayout();
         mainLayout.addComponent(menuAction);
+
         setContent(mainLayout);
     }
 
     private void setUpMenu(Layout layout) {
         MenuBar menuBar = new MenuBar();
-        menuBar.addItem("Student Registration",null);
+        menuBar.addItem("Student Registration", menuItem -> {
+            menuAction.removeAllComponents();
+            menuAction.addComponent(buildRegistrationForm());
+        });
         menuBar.addItem("Student Inbox", null);
         menuBar.addItem("Sponsers Near-By", null);
         menuBar.addItem("Sponser Registration", null);
@@ -47,11 +52,6 @@ public class EntryPoint extends UI {
         menuBar.setStyleName(ValoTheme.MENUBAR_BORDERLESS);
         layout.addComponent(menuBar);
     }
-
-    private void setUpMenuActions(Layout mainLayout) {
-        mainLayout.addComponent(buildRegistrationForm());
-    }
-
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = EntryPoint.class, productionMode = false)
