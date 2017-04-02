@@ -5,10 +5,12 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 
 import javax.servlet.annotation.WebServlet;
 
 import static com.dreamchaser.registration.RegistrationForm.buildRegistrationForm;
+import static java.lang.Boolean.*;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window
@@ -23,10 +25,23 @@ public class EntryPoint extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         Layout mainLayout = new HorizontalLayout();
+        mainLayout.setHeight("95%");
+        mainLayout.setWidth("95%");
+
+        Layout horzLayoutForMenu = new HorizontalLayout();
         MenuBar menuBar = new MenuBar();
-        menuBar.addItem("Registration",null);
-        mainLayout.addComponent(menuBar);
-        mainLayout.addComponent(buildRegistrationForm());
+        menuBar.addItem("Student Registration", menuItem -> {
+            mainLayout.addComponent(buildRegistrationForm());
+        });
+        menuBar.addItem("Student Inbox", null);
+        menuBar.addItem("Sponsers Near-By", null);
+        menuBar.addItem("Sponser Registration", null);
+        menuBar.addItem("Sponsor Inbox", null);
+        menuBar.addItem("Students Near-By", null);
+        menuBar.setStyleName(ValoTheme.MENUBAR_BORDERLESS);
+
+        horzLayoutForMenu.addComponent(menuBar);
+        mainLayout.addComponent(horzLayoutForMenu);
         setContent(mainLayout);
     }
 

@@ -35,4 +35,25 @@
   @include valo;
 
   // Insert your own theme rules here
+
+  .black {
+  	    color: white;
+  	    background: #3A3A38;
+  }
+
+
+  .grey {
+  	    color: white;
+  	    background: #808069;
+  	}
+
+  .green {
+  	    color: white;
+  	    background: #79973F;
+  	}
+
+  .red {
+  	    color: white;
+  	    background: #C67171;
+  	}
 }

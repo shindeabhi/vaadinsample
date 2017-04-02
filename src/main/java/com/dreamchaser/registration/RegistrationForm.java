@@ -27,15 +27,13 @@ public class RegistrationForm {
 
         final RichTextArea defineYou = new RichTextArea();
         defineYou.setCaption("Tell us something about yourself");
-        addComponent(formLayout, defineYou);
+        // addComponent(formLayout, defineYou);
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
 
         Button submit = new Button("Submit");
-        submit.addClickListener(e -> {
-            formLayout.addComponent(new Label("Thanks " + firstName.getValue()
-                    + " for submitting for details!!!"));
-        });
+        submit.addClickListener(e -> formLayout.addComponent(new Label("Thanks " + firstName.getValue()
+                + " for submitting for details!!!")));
 
         Button clearData = new Button("Clear Data");
         clearData.addClickListener(clickEvent -> {
@@ -52,7 +50,7 @@ public class RegistrationForm {
         addComponent(formLayout, horizontalLayout);
 
         return formLayout;
-     }
+    }
 
     private static void addComponent(Layout layout, Component component) {
         layout.addComponent(component);
