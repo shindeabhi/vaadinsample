@@ -33,6 +33,7 @@ public class EntryPoint extends UI {
         setUpMenu(menubar);
         mainLayout.addComponent(menubar);
         menuAction = new HorizontalLayout();
+        menuAction.setSizeFull();
         mainLayout.addComponent(menuAction);
 
         setContent(mainLayout);
@@ -44,13 +45,28 @@ public class EntryPoint extends UI {
             menuAction.removeAllComponents();
             menuAction.addComponent(buildRegistrationForm());
         });
-        menuBar.addItem("Student Inbox", null);
-        menuBar.addItem("Sponsers Near-By", null);
-        menuBar.addItem("Sponser Registration", null);
-        menuBar.addItem("Sponsor Inbox", null);
-        menuBar.addItem("Students Near-By", null);
+        menuBar.addItem("Student Inbox",menuItem -> {
+            defaultTempWIPTemplate();
+        });
+        menuBar.addItem("Sponsers Near-By", menuItem -> {
+            defaultTempWIPTemplate();
+        });
+        menuBar.addItem("Sponser Registration", menuItem -> {
+            defaultTempWIPTemplate();
+        });
+        menuBar.addItem("Sponsor Inbox", menuItem -> {
+            defaultTempWIPTemplate();
+        });
+        menuBar.addItem("Students Near-By", menuItem -> {
+            defaultTempWIPTemplate();
+        });
         menuBar.setStyleName(ValoTheme.MENUBAR_BORDERLESS);
         layout.addComponent(menuBar);
+    }
+
+    private void defaultTempWIPTemplate() {
+        menuAction.removeAllComponents();
+        menuAction.addComponent(new TextField("Work In Progress"));
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

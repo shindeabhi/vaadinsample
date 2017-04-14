@@ -10,48 +10,52 @@ public class RegistrationForm {
     public static Layout buildRegistrationForm() {
         FormLayout form = new FormLayout();
         form.setSizeFull();
-
-        final TextField firstName = new TextField();
-        firstName.setCaption("First Name:");
-        addComponent(form, firstName);
-
-        final TextField lastName = new TextField();
-        lastName.setCaption("Last Name:");
-        addComponent(form, lastName);
-
-        final TextField email = new TextField();
-        email.setCaption("Email:");
-        addComponent(form, email);
-
-        final TextField contactNo = new TextField();
-        contactNo.setCaption("Contact No:");
-        addComponent(form, contactNo);
-
-        final RichTextArea defineYou = new RichTextArea();
-        defineYou.setCaption("Tell us something about yourself");
-        // addComponent(form, defineYou);
+        addComponent(form, getTextField("First Name:"));
+        addComponent(form, getTextField("Last Name:"));
+        addComponent(form, getTextField("Email:"));
+        addComponent(form, getTextField("Contact No:"));
+        addComponent(form, getTextField("State:"));
+        addComponent(form, getTextField("City:"));
+        addComponent(form, getTextField("PIN:"));
+        addComponent(form, getTextArea("Address"));
+        addComponent(form, getTextArea("About Me"));
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
-
         Button submit = new Button("Submit");
-        submit.addClickListener(e -> form.addComponent(new Label("Thanks " + firstName.getValue()
-                + " for submitting for details!!!")));
-
         Button clearData = new Button("Clear Data");
-        clearData.addClickListener(clickEvent -> {
-            firstName.clear();
-            lastName.clear();
-            email.clear();
-            contactNo.clear();
-            defineYou.clear();
-        });
-
+        clearData.addClickListener(clickEvent -> clearAllDataFields(form));
         horizontalLayout.addComponent(submit);
         horizontalLayout.addComponent(clearData);
-
         addComponent(form, horizontalLayout);
 
         return form;
+    }
+
+    private static void clearAllDataFields(FormLayout layout) {
+        int componentCount = layout.getComponentCount();
+        for (Integer i = 0; i < componentCount; i++) {
+            Component component = layout.getComponent(i);
+            if (component instanceof TextField) {
+                ((TextField) component).clear();
+            }
+            else if(component instanceof TextArea){
+                ((TextArea) component).clear();
+            }
+        }
+    }
+
+    private static TextField getTextField(String caption) {
+        final TextField field = new TextField();
+        field.setCaption(caption);
+        field.setRequiredIndicatorVisible(Boolean.TRUE);
+        return field;
+    }
+
+    private static TextArea getTextArea(String caption) {
+        final TextArea field = new TextArea();
+        field.setCaption(caption);
+        field.setRequiredIndicatorVisible(Boolean.TRUE);
+        return field;
     }
 
     private static void addComponent(Layout layout, Component component) {
